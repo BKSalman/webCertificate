@@ -1,6 +1,4 @@
 from PIL import Image, ImageDraw, ImageFont
-# import pandas as pd
-import os
 import arabic_reshaper
 from bidi.algorithm import get_display
 
