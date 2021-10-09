@@ -26,7 +26,6 @@ def generateCertificate():
             img = Image.open('samples/Certificate Image 3.jpeg')
             bidi_Position = reshape(Position)
             bidi_Name = reshape(Name)
-            bidi_Id = reshape(Id)
             draw = ImageDraw.Draw(img)
             Emails += [Email]
             Names += [Name]
@@ -37,13 +36,13 @@ def generateCertificate():
 
             wPosition, hPosition = draw.textsize(bidi_Position, font=font)
             wName, hName = draw.textsize(bidi_Name, font=font)
-            wId, hId = draw.textsize(bidi_Id, font=font)
+            wId, hId = draw.textsize(Id, font=font)
 
             draw.text(xy=(xPosition-wPosition, yPosition), text=f'{bidi_Position}', fill=(0,0,0), font=font)
             draw.text(xy=(xName-wName, yName), text=f'{bidi_Name}', fill=(0,0,0), font=font)
-            draw.text(xy=(xId-wId, yId), text=f'{bidi_Id}', fill=(0,0,0), font=font)
+            draw.text(xy=(xId-wId, yId), text=f'{Id}', fill=(0,0,0), font=font)
 
-            img_fname = f'{Names[i-1]} \'s Certificate {str(i)} a.png'
+            img_fname = f'{Names[i-1]} \'s Certificate.png'
             img.save(f'pictures/{img_fname}')
         return Emails, Names
 
@@ -51,12 +50,9 @@ def sendEmail():
     Names = []
     Emails = []
     Emails, Names = generateCertificate()
-    # print(Emails)
-    # print(Names)
     i = 0
     for Email in Emails:
-        print(Names[i])
-        img_fname = f'{Names[i]} \'s Certificate {str(i+1)} a.png'
+        img_fname = f'{Names[i]} \'s Certificate.png'
         msg = EmailMessage()
         msg['Subject'] = F'شهادة {Names[i]}'
         msg['From'] = EMAIL_ADDRESS
@@ -69,7 +65,6 @@ def sendEmail():
             file_name = f.name
         msg.add_attachment(file_data, maintype='image', subtype=file_type, filename=file_name)
 
-        print(Names[i])
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
 

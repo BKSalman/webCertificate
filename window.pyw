@@ -11,6 +11,8 @@ def whoareu():
 def saveInfo():
     with open('Data3.csv', 'a', newline='') as f:
         all_info = []
+        Pre_info = Pre.get()
+        all_info += [Pre_info]
         Name_info = NName.get()
         all_info += [Name_info]
         Email_info = Email.get()
@@ -18,11 +20,13 @@ def saveInfo():
         Id_info = Id.get()
         id_info = str(Id_info)
         all_info += [Id_info]
+        print(all_info)
         writero = writer(f)
         writero.writerow(all_info)
     Email_entry.delete(0, END)
     Name_entry.delete(0, END)
-    Id_entry.delete(0, END)
+    ID_entry.delete(0, END)
+    Pre_entry.delete(0, END)
     
 
 window = Tk()
@@ -51,6 +55,7 @@ background = canvas.create_image(
 NName = StringVar()
 Email = StringVar()
 Id = IntVar()
+Pre = StringVar()
 
 Remove_btn_img = PhotoImage(file = f"UI/img0.png")
 Remove_btn = Button(
@@ -117,7 +122,23 @@ Name_entry = Entry(
 
 Name_entry.place(
     x = 104, y = 348,
-    width = 238,
+    width = 242,
+    height = 32)
+
+Pre_entry_img = PhotoImage(file = f"UI/img_textBox0.png")
+Pre_entry_bg = canvas.create_image(
+    223.0, 365.0,
+    image = Name_entry_img)
+
+Pre_entry = Entry(
+    textvariable=Pre,
+    bd = 0,
+    bg = "#f0f0f0",
+    highlightthickness = 0)
+
+Pre_entry.place(
+    x = 422, y = 391,
+    width = 242,
     height = 32)
 
 ID_entry_img = PhotoImage(file = f"UI/img_textBox1.png")
@@ -133,7 +154,7 @@ ID_entry = Entry(
 
 ID_entry.place(
     x = 104, y = 391,
-    width = 238,
+    width = 242,
     height = 32)
 
 Email_entry_img = PhotoImage(file = f"UI/img_textBox2.png")
