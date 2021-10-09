@@ -14,7 +14,7 @@ with open('Data2.csv', 'r', encoding='UTF-8') as f:
     for i, line in enumerate(f):
         if i == 0: continue
         School, Student, Year, Teacher, Supervisor, Manager = line.strip().split(',')
-        img = Image.open('Certificate Image 2.jpg')
+        img = Image.open('samples/Certificate Image 2.jpg')
         bidi_School = reshape(School)
         bidi_Student = reshape(Student)
         bidi_Year = reshape(Year)

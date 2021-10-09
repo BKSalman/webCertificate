@@ -1,6 +1,4 @@
 from PIL import Image, ImageDraw, ImageFont
-# import pandas as pd
-import os
 import arabic_reshaper
 from bidi.algorithm import get_display
 
@@ -16,7 +14,7 @@ with open('Data.csv', 'r', encoding='UTF-8') as f:
     for i, line in enumerate(f):
         if i == 0: continue
         Name, Age = line.strip().split(',')
-        img = Image.open('Certificate Image.jpg')
+        img = Image.open('samples/Certificate Image.jpg')
         bidi_Name = reshape(Name)
         bidi_Age = reshape(Age)
         draw = ImageDraw.Draw(img)
