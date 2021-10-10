@@ -23,7 +23,7 @@ def generateCertificate():
         for i, line in enumerate(f):
             if i == 0: continue
             Position, Name, Email, Id= line.strip().split(',')
-            img = Image.open('samples/Certificate Image 3.jpeg')
+            img = Image.open('samples/Certificate Image 3.jpg')
             bidi_Position = reshape(Position)
             bidi_Name = reshape(Name)
             draw = ImageDraw.Draw(img)
