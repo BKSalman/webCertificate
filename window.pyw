@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 from csv import writer
 from CertificateGenerator3 import generateCertificate, sendEmail
 
@@ -9,7 +10,7 @@ def whoareu():
     Email_entry.delete(0, END)
 
 def saveInfo():
-    with open('Data3.csv', 'a', newline='') as f:
+    with open('Data3.csv', 'a',encoding='UTF-8' , newline='') as f:
         all_info = []
         Pre_info = Pre.get()
         all_info += [Pre_info]
@@ -30,6 +31,8 @@ def saveInfo():
     
 
 window = Tk()
+
+style = ttk.Style()
 
 window.title("Certification Generator")
 
@@ -130,11 +133,11 @@ Pre_entry_bg = canvas.create_image(
     223.0, 365.0,
     image = Name_entry_img)
 
-Pre_entry = Entry(
-    textvariable=Pre,
-    bd = 0,
-    bg = "#f0f0f0",
-    highlightthickness = 0)
+style.configure("TMenubutton", background=Pre_entry_bg, )
+
+options = ["Hi" , "Hello"]
+
+Pre_entry = OptionMenu(window ,Pre ,*options)
 
 Pre_entry.place(
     x = 422, y = 391,
