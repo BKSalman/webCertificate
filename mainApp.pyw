@@ -8,6 +8,8 @@ from PyQt5.uic import loadUi
 
 import sqlite3
 
+from CertificateGenerator import generateCertificate, sendEmail
+
 class mainApp(QMainWindow):
     def __init__(self):
         super(mainApp, self).__init__()
@@ -26,6 +28,8 @@ class mainApp(QMainWindow):
         qpixmap = QtGui.QPixmap("UI/OMK3NDY.png")
         self.OMK3NDYPic.setPixmap(qpixmap)
         self.OMK3NDYPic.setHidden(True)
+        Certificate = generateCertificate()
+        self.CreateBtn.clicked.connect(Certificate)
         # self.PageOneBtn.setStyleSheet("background:#22272d;")
 
     def omk3ndy(self):
