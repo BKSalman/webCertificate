@@ -37,19 +37,7 @@ class mainApp(QMainWindow):
         self.EmailBtn.clicked.connect(sendEmail)
         # self.PageOneBtn.setStyleSheet("background:#22272d;")
 
-        # with open('Data3.csv', 'r', encoding='UTF-8') as f:
-
-        #     threads = []
-
-        #     for i, studentData in enumerate(f):
-        #         if i == 0: continue
-
-        #         thread = Thread(target=generateCertificate, args=(studentData,))
-        #         threads.append(thread)
-        #         thread.start()
-
-        #     for thread in threads: 
-        #         thread.join() # wait for completion
+        
 
     def omk3ndy(self):
         if self.omk3ndystate == 0:
