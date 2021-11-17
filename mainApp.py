@@ -8,6 +8,8 @@ from PyQt5.uic import loadUi
 
 import sqlite3
 
+from threading import Thread
+
 class mainApp(QMainWindow):
     def __init__(self):
         super(mainApp, self).__init__()
@@ -27,6 +29,20 @@ class mainApp(QMainWindow):
         self.OMK3NDYPic.setPixmap(qpixmap)
         self.OMK3NDYPic.setHidden(True)
         # self.PageOneBtn.setStyleSheet("background:#22272d;")
+
+        # with open('Data3.csv', 'r', encoding='UTF-8') as f:
+
+        #     threads = []
+
+        #     for i, studentData in enumerate(f):
+        #         if i == 0: continue
+
+        #         thread = Thread(target=generateCertificate, args=(studentData,))
+        #         threads.append(thread)
+        #         thread.start()
+
+        #     for thread in threads: 
+        #         thread.join() # wait for completion
 
     def omk3ndy(self):
         if self.omk3ndystate == 0:
