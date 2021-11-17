@@ -12,6 +12,8 @@ from threading import Thread
 
 from CertificateGenerator import generateCertificate, sendEmail
 
+connection = sqlite3.connect("Data.sqlite")
+cur = connection.cursor()
 class mainApp(QMainWindow):
     def __init__(self):
         super(mainApp, self).__init__()
@@ -30,8 +32,9 @@ class mainApp(QMainWindow):
         qpixmap = QtGui.QPixmap("UI/OMK3NDY.png")
         self.OMK3NDYPic.setPixmap(qpixmap)
         self.OMK3NDYPic.setHidden(True)
-        Certificate = generateCertificate()
-        self.CreateBtn.clicked.connect(Certificate)
+        # Certificate = generateCertificate()
+        self.CreateBtn.clicked.connect(generateCertificate)
+        self.EmailBtn.clicked.connect(sendEmail)
         # self.PageOneBtn.setStyleSheet("background:#22272d;")
 
         # with open('Data3.csv', 'r', encoding='UTF-8') as f:
@@ -57,9 +60,22 @@ class mainApp(QMainWindow):
             self.OMK3NDYPic.setHidden(True)
         
 
+    def createCertificate(self):
+        Names = []
+        Id = []
+        sqlquery = "SELECT Name FROM People;"
+        names = cur.execute(sqlquery)
+        sqlquery = "SELECT ID FROM People;"
+        IDs = cur.execute(sqlquery)
+        for i in names:
+            Names += i
+        for i in IDs:
+            Id += i
+
+
+
     def loaddata(self):
-        connection = sqlite3.connect("Data.sqlite")
-        cur = connection.cursor()
+        
         sqlquery = "SELECT * FROM People;"
 
         Count = "SELECT COUNT(*) FROM People"
