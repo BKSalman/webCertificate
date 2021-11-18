@@ -60,7 +60,7 @@ class mainApp(QMainWindow):
         for i in IDs:
             Id += i
 
-
+    
 
     def loaddata(self):
         

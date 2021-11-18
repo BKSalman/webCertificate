@@ -13,6 +13,22 @@ font = ImageFont.truetype('arial.ttf',30)
 connection = sqlite3.connect("Data.sqlite", check_same_thread=False)
 cur = connection.cursor()
 
+sqlquery = "SELECT * FROM People;"
+
+mainPre = ''
+mainID = ''
+mainName = ''
+mainEmail = ''
+
+for row in cur.execute(sqlquery):
+    mainPre += (row[0]) + ','
+    mainID += (row[1]) + ','
+    mainName += (row[2]) + ','
+    mainEmail += (row[3]) + ','
+    # print(row[0])
+mainPre = (mainPre,)
+print(f'{mainPre}')
+
 EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
 
@@ -21,49 +37,45 @@ def reshape(something):
     bidi_text = get_display(reshaped_text)
     return bidi_text
 
-def generateCertificate():
-    # threads = []
+# def generateCertificate(mainPre,mainID,mainName):
+#     threads = []
 
-    # sqll = "SELECT * FROM People;"
-    # lock = Lock()
-    # try:
-    #     lock.acquire(True)
-    #     exee = cur.execute(sqll)
-    #     for row in exee:
-    #         thread = Thread(target=generateCertificate)
-    #         threads.append(thread)
-    #         thread.start()
-    # finally:
-    #     lock.release()
+#     sqll = "SELECT * FROM People;"
+#     lock = Lock()
+#     lock.acquire(True)
+#     exee = cur.execute(sqll)
+#     for Pre, Id, Name in (mainPre), (mainID), (mainName):
+#         thread = Thread(target=generateCertificate, args=(Pre,Id,Name))
+#         threads.append(thread)
+#         thread.start()
+#     lock.release()
     
-    n = 0
-    sqlquery = "SELECT Pre, ID, Name FROM People;"
+#     n = 0
     
-    for row in cur.execute(sqlquery):
-        Pre = row[0] 
-        Id = row[1]
-        Name = row[2]
-        img = Image.open('samples/Certificate Image 3.jpg')
-        bidi_Pre = reshape(Pre)
-        bidi_Name = reshape(Name)
-        draw = ImageDraw.Draw(img)
+#     for Pre, Id, Name in (mainPre), (mainID), (mainName):
+#         img = Image.open('samples/Certificate Image 3.jpg')
+#         bidi_Pre = reshape(Pre)
+#         bidi_Name = reshape(Name)
+#         draw = ImageDraw.Draw(img)
 
-        xPosition, yPosition = (730, 300)
-        xName, yName = (700, 300)
-        xId, yId = (205, 300)
+#         xPosition, yPosition = (730, 300)
+#         xName, yName = (700, 300)
+#         xId, yId = (205, 300)
 
-        wPosition, _ = draw.textsize(bidi_Pre, font=font)
-        wName, _ = draw.textsize(bidi_Name, font=font)
-        wId, _ = draw.textsize(Id, font=font)
+#         wPosition, _ = draw.textsize(bidi_Pre, font=font)
+#         wName, _ = draw.textsize(bidi_Name, font=font)
+#         wId, _ = draw.textsize(Id, font=font)
 
-        draw.text(xy=(xPosition-wPosition, yPosition), text=f'{bidi_Pre}', fill=(0,0,0), font=font)
-        draw.text(xy=(xName-wName, yName), text=f'{bidi_Name}', fill=(0,0,0), font=font)
-        draw.text(xy=(xId-wId, yId), text=f'{Id}', fill=(0,0,0), font=font)
+#         draw.text(xy=(xPosition-wPosition, yPosition), text=f'{bidi_Pre}', fill=(0,0,0), font=font)
+#         draw.text(xy=(xName-wName, yName), text=f'{bidi_Name}', fill=(0,0,0), font=font)
+#         draw.text(xy=(xId-wId, yId), text=f'{Id}', fill=(0,0,0), font=font)
 
-        img_fname = f'Certificate{n}.png'
-        img.save(f'pictures/{img_fname}')
-        n += 1
+#         img_fname = f'Certificate{n}.png'
+#         img.save(f'pictures/{img_fname}')
+#         n += 1
 
+for Pre in mainPre:
+    print(Pre)
 
 def sendEmail():
     n = 0
