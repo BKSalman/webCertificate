@@ -10,7 +10,7 @@ import sqlite3
 
 from threading import Thread
 
-from CertificateGenerator import generateCertificate, sendEmail
+from CertificateGenerator import *
 
 connection = sqlite3.connect("Data.sqlite")
 cur = connection.cursor()
@@ -33,9 +33,10 @@ class mainApp(QMainWindow):
         self.OMK3NDYPic.setPixmap(qpixmap)
         self.OMK3NDYPic.setHidden(True)
         # Certificate = generateCertificate()
-        self.CreateBtn.clicked.connect(generateCertificate)
-        self.EmailBtn.clicked.connect(sendEmail)
+        self.CreateBtn.clicked.connect(threadthreadedCertificate)
+        self.EmailBtn.clicked.connect(threadthreadedEmail)
         # self.PageOneBtn.setStyleSheet("background:#22272d;")
+        # self.centralwidget.setStyleSheet("background:#22272d;")
 
         
 
@@ -46,20 +47,6 @@ class mainApp(QMainWindow):
         elif self.omk3ndystate == 1:
             self.omk3ndystate = 0
             self.OMK3NDYPic.setHidden(True)
-        
-
-    def createCertificate(self):
-        Names = []
-        Id = []
-        sqlquery = "SELECT Name FROM People;"
-        names = cur.execute(sqlquery)
-        sqlquery = "SELECT ID FROM People;"
-        IDs = cur.execute(sqlquery)
-        for i in names:
-            Names += i
-        for i in IDs:
-            Id += i
-
     
 
     def loaddata(self):
