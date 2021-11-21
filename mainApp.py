@@ -12,12 +12,22 @@ from threading import Thread
 
 from CertificateGenerator import *
 
-connection = sqlite3.connect("Data.sqlite")
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+connection = sqlite3.connect(resource_path("Data.sqlite"))
 cur = connection.cursor()
 class mainApp(QMainWindow):
     def __init__(self):
         super(mainApp, self).__init__()
-        loadUi("CertificationUI.ui", self)
+        loadUi(resource_path("CertificationUI.ui"), self)
         self.PageOneBtn.clicked.connect(self.page1)
         self.PageTwoBtn.clicked.connect(self.page2)
         self.tableWidget.setColumnWidth(0, 20)
@@ -29,10 +39,9 @@ class mainApp(QMainWindow):
         self.RemoveBtn.clicked.connect(self.removeinfo)
         self.OMK3NDYBtn.clicked.connect(self.omk3ndy)
         self.omk3ndystate = 0
-        qpixmap = QtGui.QPixmap("UI/OMK3NDY.png")
+        qpixmap = QtGui.QPixmap(resource_path("UI/OMK3NDY.png"))
         self.OMK3NDYPic.setPixmap(qpixmap)
         self.OMK3NDYPic.setHidden(True)
-        # Certificate = generateCertificate()
         self.CreateBtn.clicked.connect(threadthreadedCertificate)
         self.EmailBtn.clicked.connect(threadthreadedEmail)
         # self.PageOneBtn.setStyleSheet("background:#22272d;")

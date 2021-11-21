@@ -11,10 +11,20 @@ from threading import Thread, Lock
 
 import time
 
-font = ImageFont.truetype('arial.ttf',30)
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+font = ImageFont.truetype(resource_path('arial.ttf'),30)
 lock = threading.Lock()
 
-connection = sqlite3.connect("Data.sqlite", check_same_thread=False)
+connection = sqlite3.connect(resource_path("Data.sqlite"), check_same_thread=False)
 cur = connection.cursor()
 
 EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
@@ -29,7 +39,7 @@ def generateCertificate(row, n):
     Pre = row[0]
     Id = row[1]
     Name = row[2]
-    img = Image.open('samples/Certificate Image 3.jpg')
+    img = Image.open(resource_path('samples/Certificate Image 3.jpg'))
     bidi_Pre = reshape(Pre)
     bidi_Name = reshape(Name)
     draw = ImageDraw.Draw(img)
@@ -47,7 +57,7 @@ def generateCertificate(row, n):
     draw.text(xy=(xId-wId, yId), text=f'{Id}', fill=(0,0,0), font=font)
 
     img_fname = f'Certificate{n}.png'
-    img.save(f'pictures/{img_fname}')
+    img.save(resource_path(f'pictures/{img_fname}'))
 
 def threadedCertificate():
     n = 0
@@ -79,7 +89,7 @@ def sendEmail(row, n):
     msg['To'] = Email
     msg.set_content('')
 
-    with open(f'pictures/{img_fname}', 'rb') as f:
+    with open(resource_path(f'pictures/{img_fname}'), 'rb') as f:
         file_data = f.read()
         file_type = imghdr.what(f.name)
         file_name = f.name
@@ -121,3 +131,4 @@ def threadthreadedEmail():
 def threadthreadedCertificate():
     thread = Thread(target=threadedCertificate)
     thread.start()
+
