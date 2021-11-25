@@ -3,7 +3,7 @@ import smtplib
 import imghdr
 from email.message import EmailMessage
 from PIL import Image, ImageDraw, ImageFont
-import arabic_reshaper,
+import arabic_reshaper
 from bidi.algorithm import get_display
 import sqlite3
 import threading
