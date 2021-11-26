@@ -1,12 +1,85 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <title>ah yes forms</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <p>hi :)</p>
+    <div class="container --main">
+      <div class="splitter">
+        <div class="titles">
+          <p class="title1"></p>
+        </div>
+        <div class="form-container">
+          <form action="/">
+            <div class="item">
+              <p>الصفة<span>*</span></p>
+              <select required>
+                <option selected value="" disabled selected></option>
+                <option value="أ.">أستاذ</option>
+                <option value="م.">مهندس</option>
+                <option value="د.">دكتور</option>
+              </select>
+            </div>
+            <div class="item">
+              <label for="name">رقم الهوية<span>*</span></label>
+              <input id="name" type="text" name="name" required />
+            </div>
+            <div class="item">
+              <label for="email">الاسم<span>*</span></label>
+              <input id="email" type="email" name="email" required />
+            </div>
+            <div class="item">
+              <label for="zip">الايميل<span>*</span></label>
+              <input id="zip" type="text" name="zip" required />
+            </div>
+            <p class="question">ما هو تقييمك العام للدورة؟</p>
+            <table>
+              <tr>
+                <th class="first-col"></th>
+                <th>Below Expectations</th>
+                <th>Meets Expectations</th>
+                <th>Exceeds Expectations</th>
+              </tr>
+              <tr>
+                <td class="first-col">Professional</td>
+                <td><input type="radio" value="none" name="professional" /></td>
+                <td><input type="radio" value="none" name="professional" /></td>
+                <td><input type="radio" value="none" name="professional" /></td>
+              </tr>
+              <tr>
+                <td class="first-col">Informative</td>
+                <td><input type="radio" value="none" name="Informative" /></td>
+                <td><input type="radio" value="none" name="Informative" /></td>
+                <td><input type="radio" value="none" name="Informative" /></td>
+              </tr>
+              <tr>
+                <td class="first-col">Visually Pleasing</td>
+                <td><input type="radio" value="none" name="Visually" /></td>
+                <td><input type="radio" value="none" name="Visually" /></td>
+                <td><input type="radio" value="none" name="Visually" /></td>
+              </tr>
+            </table>
+            <div class="btn-block">
+              <button type="submit" href="/">SUBMIT</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
