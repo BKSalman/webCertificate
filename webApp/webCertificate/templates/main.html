@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <link rel="stylesheet" href="{% static 'main.css' %}?{% now "U" %}" />
     <title>ah yes forms</title>
     <link
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
@@ -20,11 +20,13 @@
   </head>
   <body>
     <div class="container --main">
+      <h1 class="Title">ادخل معلوماتك الشخصية وقيم الدورة لانشاء شهادتك</h1>
       <div class="form-container">
-        <form action="/">
+        <form method="POST" action=".">
+          {% csrf_token %}
           <div class="item">
-            <p>الصفة<span>*</span></p>
-            <select required>
+            <label for="Pre">الصفة</label>
+            <select name="Pre">
               <option selected value="" disabled selected></option>
               <option value="أ.">أستاذ</option>
               <option value="م.">مهندس</option>
@@ -32,46 +34,50 @@
             </select>
           </div>
           <div class="item">
-            <label for="name">رقم الهوية<span>*</span></label>
+            <label for="ID">رقم الهوية<span>*</span></label>
+            <input id="ID" type="text" name="ID" required />
+          </div>
+          <div class="item">
+            <label for="name">الاسم<span>*</span></label>
             <input id="name" type="text" name="name" required />
           </div>
           <div class="item">
-            <label for="email">الاسم<span>*</span></label>
+            <label for="email">الايميل<span>*</span></label>
             <input id="email" type="email" name="email" required />
-          </div>
-          <div class="item">
-            <label for="zip">الايميل<span>*</span></label>
-            <input id="zip" type="text" name="zip" required />
           </div>
           <p class="question">ما هو تقييمك العام للدورة؟</p>
           <table>
             <tr>
               <th class="first-col"></th>
-              <th>Below Expectations</th>
-              <th>Meets Expectations</th>
-              <th>Exceeds Expectations</th>
+              <th>ممتاز</th>
+              <th>جيد جدا</th>
+              <th>ضعيف</th>
             </tr>
             <tr>
               <td class="first-col">Professional</td>
-              <td><input type="radio" value="none" name="professional" /></td>
-              <td><input type="radio" value="none" name="professional" /></td>
-              <td><input type="radio" value="none" name="professional" /></td>
+              <td>
+                <input type="radio" value="excellent" name="professional" />
+              </td>
+              <td><input type="radio" value="medium" name="professional" /></td>
+              <td><input type="radio" value="poor" name="professional" /></td>
             </tr>
             <tr>
               <td class="first-col">Informative</td>
-              <td><input type="radio" value="none" name="Informative" /></td>
-              <td><input type="radio" value="none" name="Informative" /></td>
-              <td><input type="radio" value="none" name="Informative" /></td>
+              <td>
+                <input type="radio" value="excellent" name="Informative" />
+              </td>
+              <td><input type="radio" value="medium" name="Informative" /></td>
+              <td><input type="radio" value="poor" name="Informative" /></td>
             </tr>
             <tr>
               <td class="first-col">Visually Pleasing</td>
-              <td><input type="radio" value="none" name="Visually" /></td>
-              <td><input type="radio" value="none" name="Visually" /></td>
-              <td><input type="radio" value="none" name="Visually" /></td>
+              <td><input type="radio" value="excellent" name="Visually" /></td>
+              <td><input type="radio" value="medium" name="Visually" /></td>
+              <td><input type="radio" value="poor" name="Visually" /></td>
             </tr>
           </table>
           <div class="btn-block">
-            <button type="submit" href="/">SUBMIT</button>
+            <button type="submit">ارسال</button>
           </div>
         </form>
       </div>

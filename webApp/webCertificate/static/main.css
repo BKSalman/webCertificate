@@ -1,9 +1,14 @@
+:root{
+--main-font-color:black;
+}
 html,
 body {
   min-height: 100%;
+  margin: 0;
 }
-body,
-div,
+p{
+  margin: 0;
+}
 form,
 input,
 select,
@@ -17,20 +22,20 @@ label {
   color: #666;
   line-height: 22px;
 }
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: inherit;
-  padding: 20px;
+.--main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    flex-direction: column;
 }
-h1 {
-  position: absolute;
-  margin: 0;
-  font-size: 40px;
-  color: #fff;
-  z-index: 2;
-  line-height: 83px;
+.--main > *{
+  flex-basis: 100%;
+}
+.Title{
+  display: unset;
+  padding: 2rem;
+  height: 1rem;
 }
 form {
   width: 100%;
@@ -96,7 +101,6 @@ textarea {
   width: calc(100% - 12px);
   padding: 5px;
 }
-.item:hover p,
 .item:hover i,
 .question:hover p,
 .question label:hover,
