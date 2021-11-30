@@ -5,29 +5,29 @@ from email.message import EmailMessage
 from PIL import Image, ImageDraw, ImageFont
 import arabic_reshaper
 from bidi.algorithm import get_display
-import sqlite3
-import threading
-from threading import Thread, Lock
+from .models import participant
 
-import time
 
-font = ImageFont.truetype('arial.ttf'),30
-lock = threading.Lock()
+
+basedir = os.path.dirname(__file__)
+font = ImageFont.truetype(f'{basedir}/arial.ttf',30)
 
 
 EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
+
 
 def reshape(something):
     reshaped_text = arabic_reshaper.reshape(something)
     bidi_text = get_display(reshaped_text)
     return bidi_text
 
-def generateCertificate(pre, id, name):
-    Pre = pre
-    Id = id
-    Name = name
-    img = Image.open('samples/Certificate Image 3.jpg')
+def generateCertificate(Pre, Id, Name,):
+    # Pre = "د."
+    # Id = "879123"
+    # Name = "سلمان"
+    
+    img = Image.open(f'{basedir}/samples/Certificate Image 3.jpg')
     bidi_Pre = reshape(Pre)
     bidi_Name = reshape(Name)
     draw = ImageDraw.Draw(img)
@@ -44,8 +44,12 @@ def generateCertificate(pre, id, name):
     draw.text(xy=(xName-wName, yName), text=f'{bidi_Name}', fill=(0,0,0), font=font)
     draw.text(xy=(xId-wId, yId), text=f'{Id}', fill=(0,0,0), font=font)
 
-    img_fname = f'Certificate {Id}.png'
-    img.save(f'/webApp/Certificate/media/{img_fname}')
+    img_fname = f'Certificate{Id}.png'
+    filee = f'{basedir}/media/{img_fname}'
+    img.save(filee)
+    
+    generateCertificate.image = participant(image = filee)
+    participant.save()
 
 
 def sendEmail(name, email, id):
@@ -60,7 +64,7 @@ def sendEmail(name, email, id):
     msg['To'] = Email
     msg.set_content('')
 
-    with open(f'/webApp/Certificate/media//{img_fname}', 'rb') as f:
+    with open(f'{settings.STATIC_URL}media/{img_fname}', 'rb') as f:
         file_data = f.read()
         file_type = imghdr.what(f.name)
         file_name = f.name

@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {%block content%}
+<div class="container --main">
+  <h1 class="Title">ادخل معلوماتك الشخصية وقيم الدورة لانشاء شهادتك</h1>
+  <div class="form-container">
+    <form method="POST" action=".">
+      {% csrf_token %}
+      <div class="item">
+        <label for="Pre">الصفة</label>
+        <select name="Pre">
+          <option selected value="" selected></option>
+          <option value="أ.">أستاذ</option>
+          <option value="م.">مهندس</option>
+          <option value="د.">دكتور</option>
+        </select>
+      </div>
+      <div class="item">
+        <label for="Id">رقم الهوية<span>*</span></label>
+        <input id="Id" type="text" name="Id" required />
+      </div>
+      <div class="item">
+        <label for="Name">الاسم<span>*</span></label>
+        <input id="Name" type="text" name="Name" required />
+      </div>
+      <div class="item">
+        <label for="Email">الايميل<span>*</span></label>
+        <input id="Email" type="email" name="Email" required />
+      </div>
+      <p class="question">ما هو تقييمك العام للدورة؟</p>
+      <table>
+        <tr>
+          <th class="first-col"></th>
+          <th>ممتاز</th>
+          <th>جيد جدا</th>
+          <th>ضعيف</th>
+        </tr>
+        <tr>
+          <td class="first-col">Professional</td>
+          <td>
+            <input type="radio" value="Excellent" name="Professional" />
+          </td>
+          <td><input type="radio" value="Medium" name="Professional" /></td>
+          <td><input type="radio" value="Poor" name="Professional" /></td>
+        </tr>
+        <tr>
+          <td class="first-col">Informative</td>
+          <td>
+            <input type="radio" value="Excellent" name="Informative" />
+          </td>
+          <td><input type="radio" value="Medium" name="Informative" /></td>
+          <td><input type="radio" value="Poor" name="Informative" /></td>
+        </tr>
+        <tr>
+          <td class="first-col">Visually Pleasing</td>
+          <td><input type="radio" value="Excellent" name="Visually" /></td>
+          <td><input type="radio" value="Medium" name="Visually" /></td>
+          <td><input type="radio" value="Poor" name="Visually" /></td>
+        </tr>
+      </table>
+      <div class="btn-block">
+        <button type="submit">ارسال</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

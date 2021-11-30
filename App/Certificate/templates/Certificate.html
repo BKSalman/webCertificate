@@ -1,0 +1,7 @@
+{% extends 'base.html' %} {% load static %} {%block content%}
+<div class="container --Certificate">
+  <p>{{ Object.id }}</p>
+  <p>{{ MEDIA_URL }}</p>
+  <img src="{{ img.image.url }}" alt="" />
+</div>
+{% endblock content %}
