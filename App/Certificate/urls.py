@@ -4,7 +4,7 @@ from .views import info
 
 urlpatterns = [
 
-    path('hi/', views.info),
+    path('', views.info),
     # path('media/',views.info, name='media_path')
 
 ]

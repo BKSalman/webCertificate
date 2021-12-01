@@ -126,9 +126,7 @@ STATICFILES_DIRS = (
 
 )
 
-MEDIA_ROOT =( 
-    BASE_DIR / 'media' ,
-     )
+MEDIA_ROOT = BASE_DIR / 'Certificate' / 'media'
 
 MEDIA_URL = '/media/'
 

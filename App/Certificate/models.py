@@ -8,4 +8,4 @@ class participant(models.Model):
     id = models.TextField(primary_key=True)
     Name = models.CharField(max_length=300)
     Email = models.CharField(max_length=300)
-    image = models.ImageField(upload_to = 'media/', default = 'media/Certificate 5.png')
+    image = models.ImageField('img', upload_to = '', default = 'media/Certificate 5.png')

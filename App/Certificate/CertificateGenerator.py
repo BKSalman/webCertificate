@@ -7,7 +7,7 @@ import arabic_reshaper
 from bidi.algorithm import get_display
 from .models import participant
 
-
+Participant = participant()
 
 basedir = os.path.dirname(__file__)
 font = ImageFont.truetype(f'{basedir}/arial.ttf',30)
@@ -48,8 +48,9 @@ def generateCertificate(Pre, Id, Name,):
     filee = f'{basedir}/media/{img_fname}'
     img.save(filee)
     
-    generateCertificate.image = participant(image = filee)
-    participant.save()
+    # Participant.image = f"{img_fname}"
+    generateCertificate.enc = f'{img_fname}'
+    
 
 
 def sendEmail(name, email, id):
