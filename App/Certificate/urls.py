@@ -5,6 +5,6 @@ from .views import info
 urlpatterns = [
 
     path('', views.info),
-    # path('media/',views.info, name='media_path')
+    # path('/',views.info, name='media_path')
 
 ]
