@@ -11,6 +11,9 @@ class participant(models.Model):
     Name = models.CharField(max_length=300)
     Email = models.CharField(max_length=300)
     image = models.ImageField('img', upload_to = '', default = 'media/Certificate 5.png')
+    def __str__(self):
+        return self.id +' '+ self.Name
+
 
 class Rating(models.Model):
     choices = (
