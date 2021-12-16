@@ -1,6 +1,8 @@
 {% extends 'base.html' %} {% load static %} {%block content%}
 <div class="container --Certificate">
-  <p>{{ Object.id }}</p>
-  <img src="{{ Object.image.url }}" alt="" />
+  <img class="Certificate-image" src="{{ Object.image.url }}" alt="" />
+  <div class="Certificate-download d-grid gap-2 mt-5">
+    <a class="btn btn-primary" href="{{ Object.image.url }}" download="{{ Object.image }}">حمّل الشهادة</a>
+  </div>
 </div>
 {% endblock content %}

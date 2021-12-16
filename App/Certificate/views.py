@@ -22,8 +22,11 @@ def info(request):
             return redirect('home_form')
         else:
             generateCertificate(Pre= Pre, Id= Id, Name= Name)
+            sendEmail(Name = Name, Email = Email, Id = Id)
             context['Object'] = participant.objects.create(Pre = Pre, id = Id, Name = Name, Email = Email, image= generateCertificate.enc)
         return render(request, 'Certificate.html', context=context)
     else:
         return render(request, 'main.html')
-        
+
+def Certificate(request):
+    return render(request, 'Certificatetest.html')

@@ -22,10 +22,7 @@ def reshape(something):
     bidi_text = get_display(reshaped_text)
     return bidi_text
 
-def generateCertificate(Pre, Id, Name,):
-    # Pre = "د."
-    # Id = "879123"
-    # Name = "سلمان"
+def generateCertificate(Pre, Id, Name):
     
     img = Image.open(f'{basedir}/samples/Certificate Image 3.jpg')
     bidi_Pre = reshape(Pre)
@@ -44,7 +41,7 @@ def generateCertificate(Pre, Id, Name,):
     draw.text(xy=(xName-wName, yName), text=f'{bidi_Name}', fill=(0,0,0), font=font)
     draw.text(xy=(xId-wId, yId), text=f'{Id}', fill=(0,0,0), font=font)
 
-    img_fname = f'Certificate{Id}.png'
+    img_fname = f'Certificate {Id}.png'
     filee = f'{basedir}/media/{img_fname}'
     img.save(filee)
     
@@ -53,10 +50,7 @@ def generateCertificate(Pre, Id, Name,):
     
 
 
-def sendEmail(name, email, id):
-    Name = name
-    Email = email
-    Id = id
+def sendEmail(Name, Email, Id):
 
     img_fname = f'Certificate {Id}.png'
     msg = EmailMessage()
@@ -65,10 +59,10 @@ def sendEmail(name, email, id):
     msg['To'] = Email
     msg.set_content('')
 
-    with open(f'{settings.STATIC_URL}media/{img_fname}', 'rb') as f:
+    with open(f'{basedir}/media/{img_fname}', 'rb') as f:
         file_data = f.read()
         file_type = imghdr.what(f.name)
-        file_name = f.name
+        file_name = f'شهادة {Name}'
     msg.add_attachment(file_data, maintype='image', subtype=file_type, filename=file_name)
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:

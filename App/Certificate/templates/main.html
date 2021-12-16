@@ -6,7 +6,7 @@
       {% csrf_token %}
       <div class="item">
         <label for="Pre">الصفة</label>
-        <select name="Pre">
+        <select class="form-select" name="Pre">
           <option selected value="" selected></option>
           <option value="أ.">أستاذ</option>
           <option value="م.">مهندس</option>
@@ -15,15 +15,15 @@
       </div>
       <div class="item">
         <label for="Id">رقم الهوية<span>*</span></label>
-        <input id="Id" type="text" name="Id" required />
+        <input class="form-control" id="Id" type="text" name="Id" required />
       </div>
       <div class="item">
         <label for="Name">الاسم<span>*</span></label>
-        <input id="Name" type="text" name="Name" required />
+        <input class="form-control" id="Name" type="text" name="Name" required />
       </div>
       <div class="item">
         <label for="Email">الايميل<span>*</span></label>
-        <input id="Email" type="email" name="Email" required />
+        <input class="form-control" id="Email" type="email" name="Email" required />
       </div>
       <p class="question">ما هو تقييمك العام للدورة؟</p>
       <table>
@@ -57,7 +57,7 @@
         </tr>
       </table>
       <div class="btn-block">
-        <button type="submit">ارسال</button>
+        <button class="btn btn-primary" type="submit">ارسال</button>
       </div>
     </form>
   </div>

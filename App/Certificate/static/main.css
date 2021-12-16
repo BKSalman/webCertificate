@@ -22,19 +22,15 @@
       color: #666;
       line-height: 22px;
     }
-    .container {
-        /* display: flex; */
-        /* justify-content: center;
-        align-items: center; */
-        height: inherit;
-        margin: auto;
-        /* flex-direction: row; */
+    .--Certificate{
+      display: grid;
+      place-items: center;
     }
-    .container > *{
-      flex-basis: 100%;
-      margin: auto;
-      max-width: 70%;
+
+    .Certificate-image{
+      margin: 0;
     }
+
     .Title{
       display: block;
       margin-bottom: 2rem;
@@ -71,16 +67,13 @@
       width: 16%;
       text-align: left;
     }
-    input {
+    /* input {
         width: calc(100% - 10px);
         padding: 5px;
         border: 1px solid #ccc;
         border-radius: 3px;
         vertical-align: middle;
-        }
-    }
-    input[type="date"] {
-      padding: 4px 5px;
+        } */
     }
     textarea {
       width: calc(100% - 12px);
@@ -175,7 +168,7 @@
       margin-top: 10px;
       text-align: center;
     }
-    button {
+    /* button {
       width: 150px;
       padding: 10px;
       border: none;
@@ -184,10 +177,10 @@
       font-size: 16px;
       color: #fff;
       cursor: pointer;
-    }
-    button:hover {
+    } */
+    /* button:hover {
       background: #ff9800;
-    }
+    } */
     @media (min-width: 568px) {
       .name-item,
       .city-item {
